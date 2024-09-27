@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor.js Load and Save Markdown File</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+    }
+
+    .wrapper {
+        display: flex;
+        flex: 1;
+    }
+
+    .sidebar {
+        width: 250px;
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-right: 1px solid #ddd;
+    }
+
+    .content {
+        flex: 1;
+        padding: 20px;
+    }
+</style>
+
+<body>
+
+    <!-- Sidebar and Content Wrapper -->
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h4>Sidebar</h4>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Editor</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Settings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Form for uploading markdown file -->
+            <form id="uploadForm">
+                <label for="mdFile">Upload Markdown File:</label>
+                <input type="file" id="mdFile" accept=".md">
+                <button type="submit" class="btn btn-primary">Load into Editor</button>
+            </form>
+
+            <div id="editorjs"></div>
+
+            <!-- Button to save content as Markdown -->
+            <button id="saveButton" class="btn btn-success mt-3">Save as Markdown</button>
+        </div>
+    </div>
+</body>
+
+<!-- Editor.js and Plugins -->
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/code@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/list@latest"></script>
+
+<!-- Turndown.js -->
+<script src="https://cdn.jsdelivr.net/npm/turndown/dist/turndown.js"></script>
+<!-- Showdown.js (to parse Markdown to HTML) -->
+<script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Inisialisasi Editor.js dengan List tool
+    const editor = new EditorJS({
+        holder: 'editorjs',
+        tools: {
+            header: { class: Header, inlineToolbar: true },
+            code: { class: CodeTool, config: { placeholder: 'Enter your code...' } },
+            list: { class: List, inlineToolbar: true },  // Menambahkan List tool
+            paragraph: { inlineToolbar: true }
+        },
+        placeholder: 'Start writing...',
+    });
+
+    // Fungsi untuk memuat dan mengonversi Markdown ke Editor.js
+    document.getElementById('uploadForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+        const fileInput = document.getElementById('mdFile');
+        const file = fileInput.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const markdownContent = e.target.result;
+
+                // Gunakan Showdown untuk mengonversi Markdown menjadi HTML
+                const converter = new showdown.Converter();
+                const htmlContent = converter.makeHtml(markdownContent);
+
+                // Pars HTML content ke dalam Editor.js
+                parseMarkdownToEditor(htmlContent);
+            };
+            reader.readAsText(file);
+        }
+    });
+
+    const turndownService = new TurndownService();
+
+    // Fungsi untuk memasukkan konten HTML ke dalam Editor.js
+    function parseMarkdownToEditor(htmlContent) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlContent, 'text/html');
+
+        const blocks = [];
+
+        doc.body.childNodes.forEach(node => {
+            if (node.nodeName === 'H1') {
+                blocks.push({ type: 'header', data: { text: node.textContent, level: 1 } });
+            } else if (node.nodeName === 'H2') {
+                blocks.push({ type: 'header', data: { text: node.textContent, level: 2 } });
+            } else if (node.nodeName === 'P') {
+                blocks.push({ type: 'paragraph', data: { text: node.textContent } });
+            } else if (node.nodeName === 'PRE') {
+                const codeContent = node.querySelector('code').textContent;
+                blocks.push({ type: 'code', data: { code: codeContent } });
+            } else if (node.nodeName === 'UL') {
+                // Parsing elemen list <ul> dan <li>
+                const listItems = [];
+                node.childNodes.forEach(li => {
+                    if (li.nodeName === 'LI') {
+                        // Tambahkan item list sebagai objek dengan properti 'content'
+                        listItems.push(li.textContent);
+                    }
+                });
+                blocks.push({ type: 'list', data: { items: listItems, style: 'unordered' } });
+            } else if (node.nodeName === 'OL') {
+                // Parsing elemen ordered list <ol> dan <li>
+                const listItems = [];
+                node.childNodes.forEach(li => {
+                    if (li.nodeName === 'LI') {
+                        listItems.push(li.textContent);
+                    }
+                });
+                blocks.push({ type: 'list', data: { items: listItems, style: 'ordered' } });
+            }
+        });
+
+        // Load parsed content into Editor.js
+        editor.render({
+            blocks: blocks
+        });
+    }
+
+
+    document.getElementById('saveButton').addEventListener('click', () => {
+        editor.save().then((outputData) => {
+            let htmlContent = '';
+
+            // Iterasi melalui blok Editor.js untuk menghasilkan HTML
+            outputData.blocks.forEach(block => {
+                switch (block.type) {
+                    case 'header':
+                        htmlContent += `<h${block.data.level}>${block.data.text}</h${block.data.level}>`;
+                        break;
+                    case 'paragraph':
+                        htmlContent += `<p>${block.data.text}</p>`;
+                        break;
+                    case 'code':
+                        // Menambahkan bahasa pemrograman pada blok kode
+                        const language = 'js'; // Ubah bahasa sesuai kebutuhan
+                        htmlContent += `<pre><code class="language-${language}">${block.data.code}</code></pre>`;
+                        break;
+                    case 'list':
+                        const listType = block.data.style === 'unordered' ? 'ul' : 'ol';
+                        htmlContent += `<${listType}>`;
+                        block.data.items.forEach(item => {
+                            if (item) {  // Pastikan item memiliki konten
+                                htmlContent += `<li>${item}</li>`;
+                            } else {
+                                htmlContent += `<li>Empty item</li>`;  // Fallback untuk item kosong
+                            }
+                        });
+                        htmlContent += `</${listType}>`;
+                        break;
+                    default:
+                        console.log('Unsupported block type', block.type);
+                        break;
+                }
+            });
+
+            // Konversi HTML ke Markdown menggunakan Turndown
+            turndownService.addRule('codeBlockWithLanguage', {
+                filter: function (node, options) {
+                    return node.nodeName === 'PRE' && node.firstChild.nodeName === 'CODE';
+                },
+                replacement: function (content, node, options) {
+                    const language = node.firstChild.className.replace('language-', ''); // Mengambil nama bahasa
+                    return `\n\`\`\`${language}\n${content}\n\`\`\`\n`;
+                }
+            });
+
+            // Konversi list ke markdown
+            turndownService.addRule('list', {
+                filter: ['ul', 'ol'],
+                replacement: function (content, node) {
+                    return content;
+                }
+            });
+
+            const markdownContent = turndownService.turndown(htmlContent);
+
+            const blob = new Blob([markdownContent], { type: 'text/markdown' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'document.md';
+            link.click();
+
+        }).catch((error) => {
+            console.error('Error saving content: ', error);
+        });
+    });
+</script>
+
+</html>
