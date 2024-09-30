@@ -21,6 +21,9 @@ setTimeout(() => {
 
     // Menangani klik pada item menu
     $('#menu-item-2').on('click', function () {
+        const activeItem = $('.toggle > ul > li.active');
+        activeItem.removeClass('active');
+
         const parentLi = activeItem.parent().closest('li.toggle');
         const parentText = parentLi.contents().filter(function () {
             return this.nodeType === 3; // Mendapatkan node teks (data)
