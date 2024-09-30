@@ -1,1 +1,0 @@
-misal ini baru ya

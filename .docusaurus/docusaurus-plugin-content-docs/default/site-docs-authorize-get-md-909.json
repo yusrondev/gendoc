@@ -1,0 +1,20 @@
+{
+  "id": "Authorize/GET",
+  "title": "Authorization Code Flow",
+  "description": "GET /authorize",
+  "source": "@site/docs/Authorize/GET.md",
+  "sourceDirName": "Authorize",
+  "slug": "/Authorize/GET",
+  "permalink": "/docs/Authorize/GET",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/Authorize/GET.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "next": {
+    "title": "Get started with Bootstrap",
+    "permalink": "/docs/Bootstrap/get-started"
+  }
+}

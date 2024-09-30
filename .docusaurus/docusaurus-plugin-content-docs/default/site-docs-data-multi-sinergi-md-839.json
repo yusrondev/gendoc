@@ -1,0 +1,24 @@
+{
+  "id": "data/multi-sinergi",
+  "title": "multi-sinergi",
+  "description": "Mutli data",
+  "source": "@site/docs/data/multi-sinergi.md",
+  "sourceDirName": "data",
+  "slug": "/data/multi-sinergi",
+  "permalink": "/docs/data/multi-sinergi",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/data/multi-sinergi.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "instalasi",
+    "permalink": "/docs/config/instalasi"
+  },
+  "next": {
+    "title": "intro",
+    "permalink": "/docs/intro"
+  }
+}

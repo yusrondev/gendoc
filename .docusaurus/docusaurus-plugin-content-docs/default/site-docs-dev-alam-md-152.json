@@ -1,0 +1,24 @@
+{
+  "id": "dev/alam",
+  "title": "alam",
+  "description": "Halo",
+  "source": "@site/docs/dev/alam.md",
+  "sourceDirName": "dev",
+  "slug": "/dev/alam",
+  "permalink": "/docs/dev/alam",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/dev/alam.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Authorization Code Flow",
+    "permalink": "/docs/Authorize/GET"
+  },
+  "next": {
+    "title": "intro",
+    "permalink": "/docs/intro"
+  }
+}

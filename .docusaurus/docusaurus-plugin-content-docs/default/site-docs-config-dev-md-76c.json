@@ -1,0 +1,24 @@
+{
+  "id": "config/dev",
+  "title": "dev",
+  "description": "",
+  "source": "@site/docs/config/dev.md",
+  "sourceDirName": "config",
+  "slug": "/config/dev",
+  "permalink": "/docs/config/dev",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/config/dev.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Bootstrap Icons",
+    "permalink": "/docs/config/bootstrap"
+  },
+  "next": {
+    "title": "instalasi",
+    "permalink": "/docs/config/instalasi"
+  }
+}

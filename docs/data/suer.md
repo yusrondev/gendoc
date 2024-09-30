@@ -1,1 +1,0 @@
-baru kan ya

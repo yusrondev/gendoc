@@ -1,0 +1,20 @@
+{
+  "id": "terbaru/ok",
+  "title": "ok",
+  "description": "",
+  "source": "@site/docs/terbaru/ok.md",
+  "sourceDirName": "terbaru",
+  "slug": "/terbaru/ok",
+  "permalink": "/docs/terbaru/ok",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/terbaru/ok.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "intro",
+    "permalink": "/docs/intro"
+  }
+}

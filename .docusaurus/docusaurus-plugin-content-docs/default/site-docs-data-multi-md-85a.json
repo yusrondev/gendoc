@@ -1,0 +1,24 @@
+{
+  "id": "data/multi",
+  "title": "multi",
+  "description": "Mutli data",
+  "source": "@site/docs/data/multi.md",
+  "sourceDirName": "data",
+  "slug": "/data/multi",
+  "permalink": "/docs/data/multi",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/data/multi.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "instalasi",
+    "permalink": "/docs/config/instalasi"
+  },
+  "next": {
+    "title": "intro",
+    "permalink": "/docs/intro"
+  }
+}

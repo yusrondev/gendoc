@@ -46,6 +46,7 @@
             margin: 5px 0;
             cursor: pointer;
             margin-left: 31px;
+            border-top: 1px solid #dfe4ea;
         }
 
         .treeview li::before {
@@ -121,6 +122,14 @@
         .action-right-click:hover{
             background-color: #485460;
         }
+
+        .action-btn{
+            border: none;
+            font-size: 12px;
+            float: right;
+            margin-top: 5px;
+            background-color: transparent;
+        }
     </style>
 
 </head>
@@ -152,6 +161,23 @@
                             <div class="modal-footer">
                                 <input type="text" class="field-file-name" placeholder="Nama file...">
                                 <button type="button" class="btn btn-primary btn-sm save-file">Simpan</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal" id="modalRename" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Ubah</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="text" class="form-control new-name" data-old="" placeholder="Ubah menjadi...">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary btn-sm update">Simpan</button>
                             </div>
                         </div>
                     </div>

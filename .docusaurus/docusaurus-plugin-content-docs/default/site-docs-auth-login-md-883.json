@@ -1,0 +1,16 @@
+{
+  "id": "Auth/login",
+  "title": "login",
+  "description": "",
+  "source": "@site/docs/Auth/login.md",
+  "sourceDirName": "Auth",
+  "slug": "/Auth/login",
+  "permalink": "/docs/Auth/login",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/Auth/login.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar"
+}

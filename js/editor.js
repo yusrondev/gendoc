@@ -130,8 +130,10 @@ document.addEventListener('keydown', (event) => {
                         return this.nodeType === 3; // Mendapatkan node teks (data)
                     }).text().trim();
 
-                    dir_inside += `<div class="alert alert-light dir-file" data-dir="${parentText}">📁 ${parentText}</div>`;
+                    dir_inside += `<div class="alert alert-light dir-file" data-dir="${parentText}">📁 ${parentText} <button class="action-btn" data-type="delete">❌</button><button class="action-btn" data-type="rename">&#9998;</button></div>`;
                 })
+
+                dir_inside += `<button type="button" class="btn btn-sm btn-light add-dir">&#43; Buat Folder</button>`;
 
                 $('#body-file-management').html(dir_inside);
                 // console.log($('.sidebar').find('li.toggle'));
@@ -296,6 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 $li.removeClass('actived-file');
                 $li.on('click', function (event) {
                     $('li.toggle').find('li').removeClass('actived-file');
+                    $('li').removeClass('actived-file');
                     $(this).addClass('actived-file');
                     // Mencari elemen <li> induk terdekat dengan class 'toggle'
                     const parentLi = $li.closest('li.toggle');
@@ -346,6 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     $('.save-file').click(function(){
         let name_file = $('.field-file-name').val();
+        let new_dir = $('.new-dir').val();
         editor.save().then((outputData) => {
             let htmlContent = '';
 
@@ -395,6 +399,7 @@ document.addEventListener('DOMContentLoaded', () => {
             formData.append('file', blob, 'document.md');  // Periksa apakah blob berisi markdown
             formData.append('content', markdownContent);  // Hanya untuk debugging, kirim konten juga sebagai teks biasa
             formData.append('path', dir_ +'/'+ name_file + '.md');  // Hanya untuk debugging, kirim konten juga sebagai teks biasa
+            formData.append('new_dir', new_dir); 
 
             // Kirim file ke server
             $.ajax({
@@ -430,5 +435,61 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error saving content: ', error);
         });
     });
+
+    $('body').on('click', '.add-dir', function(){
+        let elem = $(this);
+        $('#body-file-management').append('<input type="text" class="form-control m-1 new-dir" placeholder="📁 folder baru...">');
+        elem.remove();
+    })
+
+    $('body').on('click', '.action-btn', function(e){
+        e.preventDefault();
+        let elem = $(this);
+        let type = elem.data('type');
+        let dir = elem.parent().data('dir');        
+
+        if (type == "delete") {
+            $.ajax({
+                url: 'server/file_handle.php',
+                type: 'POST',
+                data: {
+                    action: type,
+                    filename: '../docs/' + dir
+                },
+                success: function (res) {
+                    console.log(res);
+                    elem.parent().remove();
+                    editor.clear();
+    
+                    file_dir = "";
+                    dir_ = "";
+                    $('#context-menu').hide();
+                }
+            })
+        }else{
+            console.log(elem.parent().html(`<input class="form-control" data-old="${dir}" value="${dir}"><button class="rename-dir btn btn-success mt-2 btn-sm">Simpan</button>`));
+        }
+    });
+
+    $('body').on('click', '.rename-dir', function(e){
+        e.preventDefault();
+        let elem = $(this);
+        console.log(elem);
+        console.log();
+
+        $.ajax({
+            url: 'server/file_handle.php',
+            type: 'POST',
+            data: {
+                action: 'rename',
+                old : '../docs/' + elem.closest('div').find('input').data('old'),
+                new: '../docs/' + elem.closest('div').find('input').val()
+            },
+            success: function (res) {
+                window.location.reload();
+            }
+        })
+        
+    })
 
 });
