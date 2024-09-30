@@ -1,0 +1,20 @@
+{
+  "id": "Authorize/login",
+  "title": "login",
+  "description": "",
+  "source": "@site/docs/Authorize/login.md",
+  "sourceDirName": "Authorize",
+  "slug": "/Authorize/login",
+  "permalink": "/docs/Authorize/login",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/Authorize/login.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "next": {
+    "title": "intro",
+    "permalink": "/docs/intro"
+  }
+}

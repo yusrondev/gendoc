@@ -492,4 +492,58 @@ document.addEventListener('DOMContentLoaded', () => {
         
     })
 
+    setInterval(() => {
+        editor.save().then((outputData) => {
+            let htmlContent = '';
+
+            outputData.blocks.forEach(block => {
+                switch (block.type) {
+                    case 'header':
+                        htmlContent += `<h${block.data.level}>${block.data.text}</h${block.data.level}>`;
+                        break;
+                    case 'paragraph':
+                        htmlContent += `<p>${block.data.text}</p>`;
+                        break;
+                    case 'code':
+                        const language = 'js';
+                        htmlContent += `<pre><code class="language-${language}">${block.data.code}</code></pre>`;
+                        break;
+                    case 'list':
+                        const listType = block.data.style === 'unordered' ? 'ul' : 'ol';
+                        htmlContent += `<${listType}>`;
+                        block.data.items.forEach(item => {
+                            htmlContent += `<li>${item}</li>`;
+                        });
+                        htmlContent += `</${listType}>`;
+                        break;
+                }
+            });
+
+            turndownService.addRule('codeBlockWithLanguage', {
+                filter: function (node) {
+                    return node.nodeName === 'PRE' && node.firstChild.nodeName === 'CODE';
+                },
+                replacement: function (content, node) {
+                    const language = node.firstChild.className.replace('language-', '');
+                    return `\n\`\`\`${language}\n${content}\n\`\`\`\n`;
+                }
+            });
+
+            turndownService.addRule('list', {
+                filter: ['ul', 'ol'],
+                replacement: function (content) {
+                    return content;
+                }
+            });
+
+            const markdownContent = turndownService.turndown(htmlContent);
+            const blob = new Blob([markdownContent], { type: 'text/markdown' });
+
+            localStorage.setItem('temp_editor-'+ new Date().getTime(), markdownContent);
+
+        }).catch((error) => {
+            console.error('Error saving content: ', error);
+        });
+    }, 3000);
+
 });

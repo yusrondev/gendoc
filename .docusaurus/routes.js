@@ -44,19 +44,37 @@ export default [
   },
   {
     path: '/docs',
-    component: ComponentCreator('/docs', '540'),
+    component: ComponentCreator('/docs', '3f0'),
     routes: [
       {
         path: '/docs',
-        component: ComponentCreator('/docs', '350'),
+        component: ComponentCreator('/docs', 'f38'),
         routes: [
           {
             path: '/docs',
-            component: ComponentCreator('/docs', '140'),
+            component: ComponentCreator('/docs', 'c04'),
             routes: [
               {
-                path: '/docs/Auth/login',
-                component: ComponentCreator('/docs/Auth/login', '52a'),
+                path: '/docs/Authorize/credential',
+                component: ComponentCreator('/docs/Authorize/credential', 'bf9'),
+                exact: true,
+                sidebar: "tutorialSidebar"
+              },
+              {
+                path: '/docs/Authorize/data-user',
+                component: ComponentCreator('/docs/Authorize/data-user', '1ee'),
+                exact: true,
+                sidebar: "tutorialSidebar"
+              },
+              {
+                path: '/docs/Authorize/get-token',
+                component: ComponentCreator('/docs/Authorize/get-token', '6e7'),
+                exact: true,
+                sidebar: "tutorialSidebar"
+              },
+              {
+                path: '/docs/intro',
+                component: ComponentCreator('/docs/intro', '61d'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               }

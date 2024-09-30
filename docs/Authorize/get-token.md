@@ -1,0 +1,70 @@
+GET Token
+=========
+
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae quaerat consequatur necessitatibus iste praesentium hic, pariatur, perspiciatis temporibus vitae labore vel ducimus et. Aut qui repellendus non incidunt. Et, recusandae.
+
+```js
+{
+  "name": "my-website",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "docusaurus": "docusaurus",
+    "start": "docusaurus start",
+    "build": "docusaurus build",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "docusaurus deploy",
+    "clear": "docusaurus clear",
+    "serve": "docusaurus serve",
+    "write-translations": "docusaurus write-translations",
+    "write-heading-ids": "docusaurus write-heading-ids"
+  },
+  "dependencies": {
+    "@docusaurus/core": "3.5.2",
+    "@docusaurus/preset-classic": "3.5.2",
+    "@mdx-js/react": "^3.0.0",
+    "clsx": "^2.0.0",
+    "express": "^4.21.0",
+    "prism-react-renderer": "^2.3.0",
+    "prismjs": "^1.29.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@docusaurus/module-type-aliases": "3.5.2",
+    "@docusaurus/types": "3.5.2",
+    "rimraf": "^6.0.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 3 chrome version",
+      "last 3 firefox version",
+      "last 5 safari version"
+    ]
+  },
+  "engines": {
+    "node": ">=18.0"
+  }
+}
+
+```
+
+Lorem Ip
+--------
+
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae quaerat consequatur necessitatibus iste praesentium hic, pariatur, perspiciatis temporibus vitae labore vel ducimus et. Aut qui repellendus non incidunt. Et, recusandae.
+
+Dolor
+-----
+
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae quaerat consequatur necessitatibus iste praesentium hic, pariatur, perspiciatis temporibus vitae labore vel ducimus et. Aut qui repellendus non incidunt. Et, recusandae.
+
+Amet
+----
+
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae quaerat consequatur necessitatibus iste praesentium hic, pariatur, perspiciatis temporibus vitae labore vel ducimus et. Aut qui repellendus non incidunt. Et, recusandae.

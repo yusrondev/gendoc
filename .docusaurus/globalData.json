@@ -8,11 +8,26 @@
           "label": "Next",
           "isLast": true,
           "path": "/docs",
-          "mainDocId": "Auth/login",
+          "mainDocId": "Authorize/credential",
           "docs": [
             {
-              "id": "Auth/login",
-              "path": "/docs/Auth/login",
+              "id": "Authorize/credential",
+              "path": "/docs/Authorize/credential",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "Authorize/data-user",
+              "path": "/docs/Authorize/data-user",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "Authorize/get-token",
+              "path": "/docs/Authorize/get-token",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "intro",
+              "path": "/docs/intro",
               "sidebar": "tutorialSidebar"
             }
           ],
@@ -20,8 +35,8 @@
           "sidebars": {
             "tutorialSidebar": {
               "link": {
-                "path": "/docs/Auth/login",
-                "label": "Auth/login"
+                "path": "/docs/Authorize/credential",
+                "label": "Authorize/credential"
               }
             }
           }
