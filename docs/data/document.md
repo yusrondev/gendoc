@@ -1,5 +1,5 @@
-Selamat datang
---------------
+Introduction keren bet
+----------------------
 
 berikut adalah kode yang perlu anda gunakkan
 
@@ -18,6 +18,7 @@ document.getElementById('mdFile').addEventListener('change', function (event) {
         reader.readAsText(file);
     }
 });
+
 ```
 
 setelah itu gunakkan kode berikut juga
@@ -30,6 +31,7 @@ if ((event.ctrlKey || event.metaKey) && event.key === 'b') {
     // Tutup sidebar
     sidebar.style.display = sidebar.style.display === 'none' ? 'block' : 'none';
 }
+
 ```
 
 Customize everything with Sass

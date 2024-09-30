@@ -27,7 +27,7 @@ function scanDirectory($dir) {
 }
 
 // Ganti path ini dengan path ke direktori yang berisi file markdown Anda
-$directory = './docs';
+$directory = '../docs';
 $markdownFiles = scanDirectory($directory);
 
 echo json_encode($markdownFiles);
