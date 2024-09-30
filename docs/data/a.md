@@ -1,0 +1,1 @@
+baru ini gaes iyah baru

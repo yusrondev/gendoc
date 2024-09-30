@@ -70,23 +70,23 @@
             min-height: 150px !important;
         }
 
-        .dir-file:hover{
+        .dir-file:hover {
             background-color: #f1f2f6;
             cursor: pointer;
         }
 
-        .actived{
+        .actived {
             background-color: #f1f2f6;
         }
 
-        .actived-file{
+        .actived-file {
             background-color: #ced6e0;
             color: #2f3542;
             border-radius: 5px;
             font-weight: 500;
         }
 
-        .field-file-name{
+        .field-file-name {
             border: 1px solid #ced6e0;
             border-radius: 5px;
             padding: 5px;
@@ -95,8 +95,31 @@
             font-size: 13px;
         }
 
-        #uploadForm{
+        #uploadForm {
             display: none;
+        }
+
+        #context-menu {
+            display: none;
+            position: absolute;
+            z-index: 1000;
+            background-color: #2f3542;
+            width: 90px;
+            padding-left: 26px;
+            border: 1px solid #1e272e;
+            border-radius: 10px;
+        }
+
+        .action-right-click{
+            border: none;
+            display: block;
+            margin: 4px;
+            background-color: #2f3542;
+            color: #ffffff;
+        }
+
+        .action-right-click:hover{
+            background-color: #485460;
         }
     </style>
 
@@ -119,20 +142,27 @@
                 </form>
                 <div class="modal" id="modalFileManage" tabindex="-1">
                     <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">Simpan File</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Simpan File</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" id="body-file-management"></div>
+                            <div class="modal-footer">
+                                <input type="text" class="field-file-name" placeholder="Nama file...">
+                                <button type="button" class="btn btn-primary btn-sm save-file">Simpan</button>
+                            </div>
                         </div>
-                        <div class="modal-body" id="body-file-management"></div>
-                        <div class="modal-footer">
-                          <input type="text" class="field-file-name" placeholder="Nama file...">
-                          <button type="button" class="btn btn-primary btn-sm save-file">Simpan</button>
-                        </div>
-                      </div>
                     </div>
-                  </div>
+                </div>
                 <ul></ul>
+                <div id="context-menu">
+                    <ul>
+                        <button type="button" class="action-right-click" id="menu-item-2">Delete</button>
+                        <button type="button" class="action-right-click" id="menu-item-3">Rename</button>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -157,23 +187,6 @@
 <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/editor.js"></script>
-<script>
-    
-    // $.ajax({
-    //     url: 'server/file_handler.php',
-    //     type: 'POST',
-    //     data: {
-    //         action: 'write',
-    //         filename: 'myfile.txt',  // Nama file yang akan dibuat atau ditulis
-    //         content: 'Ini adalah konten yang ingin ditulis ke dalam file'  // Konten file
-    //     },
-    //     success: function (response) {
-    //         console.log(response);
-    //     },
-    //     error: function (err) {
-    //         console.log(err);
-    //     }
-    // });
-</script>
+<script src="js/right-click.js"></script>
 
 </html>

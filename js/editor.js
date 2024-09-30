@@ -119,6 +119,7 @@ document.addEventListener('keydown', (event) => {
             });
 
             if (file_dir == "") {
+                $('.field-file-name').val('');
                 modalFileManage.show();
                 let dir_inside = "";
                 $.each($('.sidebar').find('li.toggle'), function(k ,v){
@@ -170,6 +171,14 @@ document.addEventListener('keydown', (event) => {
         const sidebar = document.querySelector('.sidebar');
         // Tutup sidebar
         sidebar.style.display = sidebar.style.display === 'none' ? 'block' : 'none';
+    }
+
+    if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
+        event.preventDefault(); // Mencegah tindakan default (seperti penambahan baris baru)
+        const activeItem = $('.toggle > ul > li.actived-file');
+        activeItem.removeClass('actived-file');
+        editor.clear();
+        file_dir = "";
     }
 
 });
@@ -395,6 +404,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 processData: false,
                 contentType: false,
                 success: function(response) {
+                    $('.sidebar').find('ul').html('');
+                    const sidebar = document.querySelector('.treeview ul');
+
+                    // Ambil daftar file Markdown dari server
+                    fetch('server/directory.php')
+                        .then(response => response.json())
+                        .then(data => {
+                            // Urutkan data berdasarkan abjad
+                            const sortedData = sortData(data);
+
+                            // Panggil fungsi untuk membangun treeview dari data
+                            buildTreeview(sortedData, sidebar);
+                        })
+                        .catch(error => console.error('Error fetching files:', error));
+                    modalFileManage.hide();
                     console.log('File berhasil diupload:', response);
                 },
                 error: function(err) {
